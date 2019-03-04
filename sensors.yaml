@@ -27,10 +27,9 @@
     password: !secret mon_pass
     resources:
       - ups.load
-      - ups.realpower.nominal
       - ups.status.display
-      - input.voltage
       - battery.runtime
+      - battery.charge
 
   - platform: cpuspeed
 
