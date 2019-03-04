@@ -64,7 +64,7 @@ tts:
   - platform: google
 
 # Cloud
-cloud:
+cloud: !include cloud.yaml
 
 person:
 
@@ -89,5 +89,4 @@ device_tracker:
     password: !secret unifi_pass
     ssid_filter:
       - 'WEFi'
-      - 'WEIoT'
 
