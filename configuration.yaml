@@ -80,9 +80,9 @@ tts:
     pitch: high
     contour: (0, 0) (100, 100)
 
-# hue:
-#   bridges:
-#     - host: !secret hue_ip
+hue:
+  bridges:
+    - host: !secret hue_ip
 
 sabnzbd:
   host: !secret host_ip
