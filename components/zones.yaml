@@ -1,0 +1,10 @@
+  - name: Home
+    latitude: !secret lat
+    longitude:  !secret long
+    radius: 15
+    icon: mdi:account-multiple
+  - name: Work
+    latitude: !secret work_lat
+    longitude: !secret work_long
+    radius: 150
+    icon: mdi:microsoft

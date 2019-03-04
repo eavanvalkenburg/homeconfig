@@ -1,0 +1,98 @@
+
+  - platform: plex
+    entity_namespace: 'plex'
+    include_non_clients: false
+    scan_interval: 5
+    show_all_controls: false
+    use_custom_entity_ids: true
+    use_episode_art: true
+    
+  - platform: webostv
+    name: TV
+    host: !secret living_tv_ip
+    turn_on_action:
+      service: wake_on_lan.send_magic_packet
+      data:
+        mac: 14:C9:13:58:A0:C1
+    customize:
+      sources:
+        - livetv
+        - youtube
+        - hdmi3
+        - NPO Start
+
+  - platform: xboxone
+    name: Xbox
+    device: !secret xbox_live_device_id
+
+  - platform: universal
+    name: Multimedia
+    children:
+      - media_player.xbox
+      - media_player.tv
+    commands:
+      turn_on:
+        service: switch.turn_on
+        data:
+          entity_id: switch.multimedia
+      turn_off:
+        service: switch.turn_off
+        data:
+          entity_id: switch.multimedia
+      volume_up:
+        service: media_player.volume_up
+        data:
+          entity_id: media_player.living_room
+      volume_down:
+        service: media_player.volume_down
+        data:
+          entity_id: media_player.living_room
+      volume_mute:
+        service: media_player.volume_mute
+        data:
+          entity_id: media_player.living_room
+          is_volume_muted: true
+      volume_set:
+        service: media_player.volume_set
+        data_template:
+          entity_id: media_player.living_room
+          volume_level: '{{ volume_level }}'
+      media_play_pause:
+        service: media_player.media_play_pause
+        data:
+          entity_id: media_player.xbox
+      select_source:
+        service: media_player.select_source
+        data_template:
+          entity_id: >
+            {%- if states.media_player.tv.attributes.source != "HDMI2" -%}
+            media_player.tv
+            {%- else -%}
+            media_player.xbox
+            {%- endif -%}
+          source: '{{ source }}'
+    attributes:
+      state: switch.multimedia
+      is_volume_muted: media_player.living_room|is_volume_muted
+      volume_level: media_player.living_room|volume_level
+      source: >
+        {%- set plex = states.media_player.plex_plex_sn16y90mhqpsit50ds4iuvc3.attributes.media_library_name -%}
+        {%- set xbox = states.media_player.xbox.attributes.source -%}
+        {%- set tv = states.media_player.tv.attributes.source -%}
+        {%- if tv != "HDMI2" -%}
+        {{ tv }}
+        {%- elif xbox == "Plex for Xbox One" -%}
+        {%- if not plex -%}
+        {{ xbox }}
+        {%- else -%}
+        {{ plex }}
+        {%- endif -%}
+        {%- else -%}
+        {{ xbox }}
+        {%- endif -%}
+      source_list: >
+        {%- if states.media_player.tv.attributes.source != "HDMI2" -%}
+        {{ states.media_player.tv.attributes.source_list }}
+        {%- else -%}
+        {{ states.media_player.xbox.attributes.source_list }}
+        {%- endif -%}

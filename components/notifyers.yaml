@@ -1,0 +1,3 @@
+  - platform: webostv
+    name: notify_tv
+    host: !secret living_tv_ip

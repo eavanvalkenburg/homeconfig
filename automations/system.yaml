@@ -1,0 +1,9 @@
+- id: startup_notification
+  alias: Startup Notification
+  trigger:
+  - event: start
+    platform: homeassistant
+  action:
+  - service: notify.notify_tv
+    data:
+      message: Yay, Home Assistant is back up!

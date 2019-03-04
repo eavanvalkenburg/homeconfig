@@ -1,0 +1,133 @@
+  - platform: buienradar
+    monitored_conditions:
+      - stationname
+      - condition
+      - conditiondetailed
+      - symbol
+      - humidity
+      - temperature
+      - windforce
+      - winddirection
+      - precipitation
+
+  - platform: systemmonitor
+    resources:
+      - type: last_boot
+      - type: memory_use_percent
+      - type: disk_use_percent
+        arg: /
+
+  - platform: uptime
+    unit_of_measurement: minutes
+
+  - platform: nut
+    host: localhost
+    port: 3493
+    username: monuser
+    password: !secret mon_pass
+    resources:
+      - ups.load
+      - ups.status.display
+      - battery.runtime
+      - battery.charge
+
+  - platform: cpuspeed
+
+  # - platform: speedtest
+  #   monitored_conditions:
+  #     - ping
+  #     - download
+  #     - upload
+
+  - platform: dnsip
+
+  - platform: sonarr
+    api_key: !secret sonarr_api_key
+    monitored_conditions:
+      - series
+      - upcoming
+      - wanted
+      - queue
+      - commands 
+      - diskspace
+    days: 2
+    include_paths:
+      - /content
+    unit: TB
+    
+  - platform: postnl
+    username: !secret postnl_un
+    password: !secret postnl_pw
+
+  - platform: ups
+    username: !secret ups_username
+    password: !secret ups_password
+
+  - platform: hue
+    ip_address: !secret hue_ip
+    token: !secret hue_key
+
+  - platform: alpha_vantage
+    api_key: !secret alpha_vantage_key
+    symbols:
+    - symbol: MSFT
+      name: Microsoft
+
+  - platform: history_stats
+    name: Clear day
+    entity_id: sensor.weather_condition
+    state: 'clear'
+    type: count
+    end: '{{ now() }}'
+    duration: 
+      minutes: 60
+
+  - platform: template
+    sensors:
+      total_packages:
+        friendly_name: Total packages
+        unit_of_measurement: 'packages'
+        value_template: "{{ states('sensor.postnl')|int + states('sensor.ups')|int }}"
+      hassuptime:
+          friendly_name: "HASS Uptime"
+          value_template: >-
+            {% set uptime = states.sensor.uptime.state | round %}
+            {% set minutes = (uptime % 60) | int %}
+            {% set hours = ((uptime / 60) % 24) | int %}
+            {% set days = (uptime / 1440) | int %}
+            {%- if days > 0 -%}
+              {%- if days == 1 -%}
+                1 day
+              {%- else -%}
+                {{ days }} days
+              {%- endif -%}
+              {{ ', ' }}
+            {%- endif -%}
+            {{ '%02d' % hours }}:{{ '%02d' % minutes }} hrs
+    #   temperature:
+    #     entity_id:
+    #     - sensor.hue_sml_001788010202dab402
+    #     friendly_name: 'Kitchen Temperature'
+    #     value_template: '{{(states.sensor.hue_sml_001788010202dab402.attributes.temperature)  | round(1)}}'
+    #     unit_of_measurement: °C
+    #   kitchen_light_level:
+    #     entity_id:
+    #     - sensor.hue_sml_001788010202dab402
+    #     friendly_name: 'Kitchen Light level'
+    #     value_template: '{{ states.sensor.hue_sml_001788010202dab402.attributes.lx | round(1)}}'
+    #     unit_of_measurement: lux
+      resume_music:
+        friendly_name: Resume the music when the TV turns off
+        value_template: "{{ is_state('input_boolean.resume_music', 'on') }}"
+        icon_template: >-
+          {% if is_state('input_boolean.resume_music', 'on') %}
+            mdi:music-note
+          {% else %}
+            mdi:music-note-off
+          {% endif %}
+      sun_elevation:
+        value_template: '{{ states.sun.sun.attributes.elevation | float }}'
+        unit_of_measurement: 'º'
+      sun_azimuth:
+        value_template: '{{ states.sun.sun.attributes.azimuth | float }}'
+        unit_of_measurement: 'º'
