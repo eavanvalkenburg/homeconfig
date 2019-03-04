@@ -104,18 +104,18 @@
               {{ ', ' }}
             {%- endif -%}
             {{ '%02d' % hours }}:{{ '%02d' % minutes }} hrs
-    #   temperature:
-    #     entity_id:
-    #     - sensor.hue_sml_001788010202dab402
-    #     friendly_name: 'Kitchen Temperature'
-    #     value_template: '{{(states.sensor.hue_sml_001788010202dab402.attributes.temperature)  | round(1)}}'
-    #     unit_of_measurement: °C
-    #   kitchen_light_level:
-    #     entity_id:
-    #     - sensor.hue_sml_001788010202dab402
-    #     friendly_name: 'Kitchen Light level'
-    #     value_template: '{{ states.sensor.hue_sml_001788010202dab402.attributes.lx | round(1)}}'
-    #     unit_of_measurement: lux
+      temperature:
+        entity_id:
+        - sensor.hue_sml_00_17_88_01_02_02_da_b4_02
+        friendly_name: 'Study Temperature'
+        value_template: '{{(states.sensor.hue_sml_00_17_88_01_02_02_da_b4_02.attributes.temperature)  | round(1)}}'
+        unit_of_measurement: °C
+      kitchen_light_level:
+        entity_id:
+        - sensor.hue_sml_00_17_88_01_02_02_da_b4_02
+        friendly_name: 'Study Light level'
+        value_template: '{{ states.sensor.hue_sml_00_17_88_01_02_02_da_b4_02.attributes.lx | round(1)}}'
+        unit_of_measurement: lux
       resume_music:
         friendly_name: Resume the music when the TV turns off
         value_template: "{{ is_state('input_boolean.resume_music', 'on') }}"
