@@ -88,8 +88,8 @@ device_tracker:
     username: !secret unifi_user
     password: !secret unifi_pass
     consider_home: 120
-    track_new_devices: no
     new_device_defaults:
+      track_new_devices: false
       hide_if_away: false
     ssid_filter:
       - 'WEFi'
