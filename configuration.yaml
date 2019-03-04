@@ -87,6 +87,10 @@ device_tracker:
     verify_ssl: false
     username: !secret unifi_user
     password: !secret unifi_pass
+    consider_home: 120
+    track_new_devices: no
+    new_device_defaults:
+      hide_if_away: false
     ssid_filter:
       - 'WEFi'
 
