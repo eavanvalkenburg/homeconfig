@@ -104,13 +104,13 @@
               {{ ', ' }}
             {%- endif -%}
             {{ '%02d' % hours }}:{{ '%02d' % minutes }} hrs
-      temperature:
+      study_temperature:
         entity_id:
         - sensor.hue_sml_00_17_88_01_02_02_da_b4_02
         friendly_name: 'Study Temperature'
         value_template: '{{(states.sensor.hue_sml_00_17_88_01_02_02_da_b4_02.attributes.temperature)  | round(1)}}'
         unit_of_measurement: °C
-      kitchen_light_level:
+      study_light_level:
         entity_id:
         - sensor.hue_sml_00_17_88_01_02_02_da_b4_02
         friendly_name: 'Study Light level'
