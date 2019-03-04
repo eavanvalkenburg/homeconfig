@@ -118,7 +118,7 @@ entity_registry.yaml
 secrets.yaml
 zwave_device_config.yaml
 tokens.json
-xbox-tokens.json
+.xbox-tokens.json
 .config_entries.json
 *.config_entries
 *.log
