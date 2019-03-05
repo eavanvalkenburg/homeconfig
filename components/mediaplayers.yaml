@@ -24,7 +24,7 @@
   - platform: xboxone
     name: Xbox
     device: !secret xbox_live_device_id
-    # ip_address: !secret xbox_ip
+    ip_address: !secret xbox_ip
 
   - platform: universal
     name: Multimedia

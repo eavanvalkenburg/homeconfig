@@ -108,5 +108,6 @@ sonos:
 logger:
   default: warning
   logs:
-    homeassistant.components.sonos: debug
-    homeassistant.components.media_player.sonos: debug
+    custom_components.media_player.xbox: debug
+#     homeassistant.components.sonos: debug
+#     homeassistant.components.media_player.sonos: debug
