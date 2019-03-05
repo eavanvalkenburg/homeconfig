@@ -98,4 +98,6 @@ sabnzbd:
 
 sonos:
   media_player:
-    hosts: !secret sonos_playbase_ip
+    hosts: 
+      - !secret sonos_playbase_ip
+      - !secret sonos_kitchen_ip
