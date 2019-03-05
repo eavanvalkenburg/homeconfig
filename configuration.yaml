@@ -100,4 +100,7 @@ sonos:
   media_player:
     hosts: 
       - !secret sonos_playbase_ip
-      - !secret sonos_kitchen_ip
+      - !secret sonos_kitchen_front_ip
+      - !secret sonos_kitchen_back_ip
+      - !secret sonos_living_front_ip
+      - !secret sonos_living_back_ip
