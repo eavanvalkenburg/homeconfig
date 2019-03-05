@@ -95,3 +95,7 @@ sabnzbd:
     - 'queue_remaining'
     - 'disk_size'
     - 'disk_free'
+
+sonos:
+  media_player:
+    interface_addr: !secret sonos_playbase_ip
