@@ -101,6 +101,12 @@ sonos:
     hosts: 
       - !secret sonos_playbase_ip
       - !secret sonos_kitchen_front_ip
-      - !secret sonos_kitchen_back_ip
-      - !secret sonos_living_front_ip
-      - !secret sonos_living_back_ip
+      # - !secret sonos_kitchen_back_ip
+      # - !secret sonos_living_front_ip
+      # - !secret sonos_living_back_ip
+
+logger:
+  default: warning
+  logs:
+    homeassistant.components.sonos: debug
+    homeassistant.components.media_player.sonos: debug
