@@ -90,7 +90,7 @@ class XboxOne:
     def get(self, endpoint, *args, **kwargs):
         endpoint = endpoint.replace('<liveid>', self.liveid)
         full_url = urljoin(self.base_url, endpoint)
-        return requests.get(full_url, *args, **kwargs)
+        return requests.get(full_url, timeout=7, *args, **kwargs)
 
     @property
     def available(self):
