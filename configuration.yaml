@@ -6,6 +6,9 @@ homeassistant:
   unit_system: metric
   time_zone: Europe/Amsterdam
   customize: !include components/customize.yaml
+  auth_providers:
+   - type: homeassistant
+   - type: legacy_api_password
 frontend:
 config:
 updater:
@@ -35,6 +38,7 @@ wake_on_lan:
 http:
   base_url: home.eavv.nl
   api_password: !secret api_password
+
 api:
 
 ### included components, automations and scripts
