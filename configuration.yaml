@@ -34,7 +34,8 @@ wake_on_lan:
 
 http:
   base_url: home.eavv.nl
-# api:
+  api_password: !secret api_password
+api:
 
 ### included components, automations and scripts
 sensor: !include components/sensors.yaml
