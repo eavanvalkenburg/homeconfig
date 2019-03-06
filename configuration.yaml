@@ -36,7 +36,8 @@ person:
 wake_on_lan:
 
 http:
-  base_url: https://home.eavv.nl
+  base_url: http://10.0.0.7:8123
+  # https://home.eavv.nl
   api_password: !secret api_password
 
 api:
