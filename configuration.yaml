@@ -8,7 +8,7 @@ homeassistant:
   customize: !include components/customize.yaml
   auth_providers:
    - type: homeassistant
-   - type: legacy_api_password
+  #  - type: legacy_api_password
 frontend:
 config:
 updater:
@@ -36,11 +36,10 @@ person:
 wake_on_lan:
 
 http:
-  base_url: http://10.0.0.7:8123
-  # https://home.eavv.nl
-  api_password: !secret api_password
+  base_url: https://home.eavv.nl
+  # api_password: !secret api_password
 
-api:
+# api:
 
 ### included components, automations and scripts
 sensor: !include components/sensors.yaml
