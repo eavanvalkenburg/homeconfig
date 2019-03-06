@@ -147,3 +147,4 @@ www
 .homekit.state
 *.db
 core
+.spotify-token-cache
