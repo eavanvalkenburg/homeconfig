@@ -111,13 +111,13 @@ sonos:
       # - !secret sonos_living_front_ip
       # - !secret sonos_living_back_ip
 
-homeconnect:
-  client_id: !secret homeconnect_client_id
-  client_secret: !secret homeconnect_client_secret
+# homeconnect:
+#   client_id: !secret homeconnect_client_id
+#   client_secret: !secret homeconnect_client_secret
 
-logger:
-  default: warning
-  logs:
-    custom_components.homeconnect: debug
+# logger:
+#   default: warning
+#   logs:
+#     custom_components.homeconnect: debug
 #     homeassistant.components.sonos: debug
 #     homeassistant.components.media_player.sonos: debug
