@@ -148,3 +148,4 @@ www
 *.db
 core
 .spotify-token-cache
+.homeconnect-token-cache
