@@ -3,5 +3,6 @@
       include_entities:
         - media_player.multimedia
         - media_player.tv
+        - switch.sonos_joined
         # - switch.xboxone
         # - cover.blind
