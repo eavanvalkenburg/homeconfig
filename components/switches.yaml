@@ -22,3 +22,9 @@
           service: media_player.sonos_unjoin
           data:
             entity_id: media_player.living_room
+        icon_template: >-
+          {% if states.media_player.living_room.attributes.sonos_group | count > 1 %}
+            mdi:speaker-multiple
+          {% else %}
+            mdi:speaker
+          {% endif %}
