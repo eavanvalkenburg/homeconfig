@@ -106,15 +106,15 @@
             {{ '%02d' % hours }}:{{ '%02d' % minutes }} hrs
       study_temperature:
         entity_id:
-        - sensor.hue_sml_00_17_88_01_02_02_da_b4_02
+        - sensor.hue_sensor_sml_00_17_88_01_02_02_da_b4_02
         friendly_name: 'Study Temperature'
-        value_template: '{{(states.sensor.hue_sml_00_17_88_01_02_02_da_b4_02.attributes.temperature)  | round(1)}}'
+        value_template: '{{(states.sensor.hue_sensor_sml_00_17_88_01_02_02_da_b4_02.attributes.temperature)  | round(1)}}'
         unit_of_measurement: °C
       study_light_level:
         entity_id:
-        - sensor.hue_sml_00_17_88_01_02_02_da_b4_02
+        - sensor.hue_sensor_sml_00_17_88_01_02_02_da_b4_02
         friendly_name: 'Study Light level'
-        value_template: '{{ states.sensor.hue_sml_00_17_88_01_02_02_da_b4_02.attributes.lx | round(1)}}'
+        value_template: '{{ states.sensor.hue_sensor_sml_00_17_88_01_02_02_da_b4_02.attributes.lx | round(1)}}'
         unit_of_measurement: lux
       resume_music:
         friendly_name: Resume the music when the TV turns off
