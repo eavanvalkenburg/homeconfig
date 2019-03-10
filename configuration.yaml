@@ -107,6 +107,7 @@ sonos:
     hosts: 
       - !secret sonos_playbase_ip
       - !secret sonos_kitchen_front_ip
+      - !secret sonos_study_ip
       # - !secret sonos_kitchen_back_ip
       # - !secret sonos_living_front_ip
       # - !secret sonos_living_back_ip
