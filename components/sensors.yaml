@@ -63,7 +63,7 @@
     username: !secret ups_username
     password: !secret ups_password
 
-  - platform: hue
+  - platform: hue_sensor
     ip_address: !secret hue_ip
     token: !secret hue_key
 
