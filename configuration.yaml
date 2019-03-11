@@ -47,8 +47,7 @@ notify: !include components/notifyers.yaml
 group: !include components/groups.yaml
 switch: !include components/switches.yaml
 automation: !include_dir_merge_list automation
-# script: !include_dir_merge_list script
-script: !include script/scripts.yaml
+script: !include scripts/scripts.yaml
 media_player: !include components/mediaplayers.yaml
 zone: !include components/zones.yaml
 cloud: !include components/cloud.yaml
