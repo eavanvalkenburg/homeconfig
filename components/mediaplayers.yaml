@@ -20,7 +20,8 @@
     turn_on_action:
       service: wake_on_lan.send_magic_packet
       data:
-        mac: 14:C9:13:58:A0:C1
+        broadcast_address: !secret broadcast_ip
+        mac: !secret living_tv_mac
     customize:
       sources:
         - livetv
@@ -73,7 +74,7 @@
         service: media_player.select_source
         data_template:
           entity_id: >
-            {%- if states.media_player.tv.attributes.source != "HDMI2" -%}
+            {%- if states.media_player.tv.attributes.source != "HDMI3" -%}
             media_player.tv
             {%- else -%}
             media_player.xbox
@@ -84,10 +85,10 @@
       is_volume_muted: media_player.living_room|is_volume_muted
       volume_level: media_player.living_room|volume_level
       source: >
-        {%- set plex = states.media_player.plex_plex_sn16y90mhqpsit50ds4iuvc3.attributes.media_library_name -%}
+        {%- set plex = states.media_player.xboxone_plex.attributes.media_library_name -%}
         {%- set xbox = states.media_player.xbox.attributes.source -%}
         {%- set tv = states.media_player.tv.attributes.source -%}
-        {%- if tv != "HDMI2" -%}
+        {%- if tv != "HDMI3" -%}
         {{ tv }}
         {%- elif xbox == "Plex for Xbox One" -%}
         {%- if not plex -%}
@@ -99,7 +100,7 @@
         {{ xbox }}
         {%- endif -%}
       source_list: >
-        {%- if states.media_player.tv.attributes.source != "HDMI2" -%}
+        {%- if states.media_player.tv.attributes.source != "HDMI3" -%}
         {{ states.media_player.tv.attributes.source_list }}
         {%- else -%}
         {{ states.media_player.xbox.attributes.source_list }}

@@ -11,8 +11,9 @@
         - service: media_player.turn_off
           data:
             entity_id: media_player.xbox
-      sonos_joined:
-        value_template: "{{ states.media_player.living_room.attributes.sonos_group | count > 1}}"
+      sonos_living_and_kitchen:
+        friendly_name: Sonos Living and Kitchen
+        value_template: "{{ states.media_player.living_room.attributes.sonos_group | count == 2 and 'media_player.kitchen' in states.media_player.living_room.attributes.sonos_group }}"
         turn_on:
           service: media_player.sonos_join
           data:
@@ -20,11 +21,54 @@
             entity_id: media_player.kitchen
         turn_off:
           service: media_player.sonos_unjoin
-          data:
-            entity_id: media_player.living_room
         icon_template: >-
           {% if states.media_player.living_room.attributes.sonos_group | count > 1 %}
             mdi:speaker-multiple
+          {% else %}
+            mdi:speaker
+          {% endif %}
+      sonos_everywhere_tv:
+        friendly_name: TV Everywhere
+        value_template: "{{ states.media_player.study.attributes.sonos_group | count == 3 }}"
+        turn_on:
+          - service: media_player.sonos_join
+            data:
+              master: media_player.living_room
+              entity_id: 
+                - media_player.kitchen
+                - media_player.study
+        turn_off:
+          service: media_player.sonos_unjoin
+        icon_template: >-
+          {% if states.media_player.living_room.attributes.sonos_group | count == 3 %}
+            mdi:speaker-multiple
+          {% else %}
+            mdi:speaker
+          {% endif %}
+      sonos_everywhere_records:
+        friendly_name: Records Everywhere
+        value_template: "{{ states.media_player.study.attributes.sonos_group | count == 3 }}"
+        turn_on:
+          - service: media_player.sonos_join
+            data:
+              master: media_player.study
+              entity_id: 
+                - media_player.kitchen
+                - media_player.living_room
+          - service: media_player.select_source
+            data:
+              entity_id: media_player.study
+              source: 'line-in'
+        turn_off:
+          service: media_player.sonos_unjoin
+        icon_template: >-
+          {% if states.media_player.study.attributes.sonos_group | count == 3 %}
+          {% if states.media_player.study.attributes.sonos_group[0] == 'media_player.study' 
+          and states.media_player.study.attributes.source == 'line-in' %}
+            mdi:record-player
+          {% else %}
+            mdi:speaker-multiple
+          {% endif %}
           {% else %}
             mdi:speaker
           {% endif %}

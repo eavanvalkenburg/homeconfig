@@ -1,0 +1,9 @@
+  media_on:
+    alias: Turn on Multimedia
+    sequence:
+      - service: media_player.turn_on
+        data:
+          entity_id: media_player.tv
+      - service: media_player.turn_on
+        data:
+          entity_id: media_player.xbox
