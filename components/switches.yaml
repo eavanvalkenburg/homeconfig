@@ -29,7 +29,8 @@
           {% endif %}
       sonos_everywhere_tv:
         friendly_name: TV Everywhere
-        value_template: "{{ states.media_player.study.attributes.sonos_group | count == 3 }}"
+        value_template: "{{ states.media_player.living_room.attributes.sonos_group | count == 3 
+        and states.media_player.living_room.attributes.source == 'TV' }}"
         turn_on:
           - service: media_player.sonos_join
             data:
@@ -41,13 +42,18 @@
           service: media_player.sonos_unjoin
         icon_template: >-
           {% if states.media_player.living_room.attributes.sonos_group | count == 3 %}
+          {% if states.media_player.living_room.attributes.source == 'TV' %}
+            mdi:television
+          {% else %}
             mdi:speaker-multiple
+          {% endif %}
           {% else %}
             mdi:speaker
           {% endif %}
       sonos_everywhere_records:
         friendly_name: Records Everywhere
-        value_template: "{{ states.media_player.study.attributes.sonos_group | count == 3 }}"
+        value_template: "{{ states.media_player.study.attributes.sonos_group | count == 3 
+        and states.media_player.study.attributes.source == 'Line-in' }}"
         turn_on:
           - service: media_player.sonos_join
             data:
@@ -58,13 +64,13 @@
           - service: media_player.select_source
             data:
               entity_id: media_player.study
-              source: 'line-in'
+              source: 'Line-in'
         turn_off:
           service: media_player.sonos_unjoin
         icon_template: >-
           {% if states.media_player.study.attributes.sonos_group | count == 3 %}
           {% if states.media_player.study.attributes.sonos_group[0] == 'media_player.study' 
-          and states.media_player.study.attributes.source == 'line-in' %}
+          and states.media_player.study.attributes.source == 'Line-in' %}
             mdi:record-player
           {% else %}
             mdi:speaker-multiple
