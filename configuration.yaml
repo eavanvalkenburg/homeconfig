@@ -46,7 +46,7 @@ sensor: !include components/sensors.yaml
 notify: !include components/notifyers.yaml
 group: !include components/groups.yaml
 switch: !include components/switches.yaml
-automation: !include_dir_merge_list automation
+automation: !include_dir_merge_list automations
 script: !include scripts/scripts.yaml
 media_player: !include components/mediaplayers.yaml
 cover: !include components/covers.yaml
