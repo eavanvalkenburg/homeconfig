@@ -49,6 +49,7 @@ switch: !include components/switches.yaml
 automation: !include_dir_merge_list automation
 script: !include scripts/scripts.yaml
 media_player: !include components/mediaplayers.yaml
+cover: !include components/covers.yaml
 zone: !include components/zones.yaml
 cloud: !include components/cloud.yaml
 

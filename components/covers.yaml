@@ -1,0 +1,3 @@
+  - platform: brunt
+    username: !secret brunt_username
+    password: !secret brunt_password
