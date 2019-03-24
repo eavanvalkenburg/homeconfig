@@ -41,6 +41,13 @@ http:
 
 api:
 
+### iframes
+panel_iframe:
+  nodered:
+    title: Node-RED
+    icon: mdi:sitemap
+    url: http://homeserver:1880
+
 ### included components, automations and scripts
 sensor: !include components/sensors.yaml
 notify: !include components/notifyers.yaml
