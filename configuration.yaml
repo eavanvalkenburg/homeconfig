@@ -51,7 +51,7 @@ panel_iframe:
     url: http://homeserver:1880
   pihole:
     title: Pi-Hole
-    icon: mdi:pi-hole
+    icon: mdi:cancel
     url: http://homeserver:4865/admin/index.php
 
 ### included components, automations and scripts
