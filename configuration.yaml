@@ -11,6 +11,7 @@ homeassistant:
   #  - type: legacy_api_password
 frontend:
   themes: !include components/themes.yaml
+  javascript_version: latest
 config:
 updater:
   include_used_components: true
