@@ -7,3 +7,12 @@
     - service: notify.notify_tv
       data:
         message: Yay, Home Assistant is back up!
+  - alias: 'Set theme at startup'
+    initial_state: 'on'
+    trigger:
+     - platform: homeassistant
+       event: start
+    action:
+      service: frontend.set_theme
+      data:
+        name: clear
