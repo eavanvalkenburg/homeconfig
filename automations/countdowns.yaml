@@ -1,4 +1,3 @@
-automation:
   - alias: Reminder - Refresh date countdown sensors
     initial_state: on
     trigger:
