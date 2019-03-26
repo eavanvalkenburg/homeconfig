@@ -42,6 +42,7 @@ http:
   # api_password: !secret api_password
 
 api:
+python_script:
 
 ### iframes
 panel_iframe:
