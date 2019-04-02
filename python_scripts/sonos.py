@@ -19,7 +19,7 @@
 """      source: tv                                   """
 
 dom = 'media_player'
-test = { "action": "join", "speakers": "media_player.living room, media_player.kitchen" }
+test = { "action": "join", "speakers": "living room, kitchen" }
 sources = {'Line-in', 'TV'}
 actions = {'join', 'unjoin'}
 
@@ -27,7 +27,8 @@ action = data.get('action')
 logger.warning(action)
 speakers = data.get('speakers')
 if isinstance(speakers, str):
-        speakers = [s.strip() for s in speakers.split(',')]
+    speakers = [s.strip() for s in speakers.split(',')]
+speakers = ["media_player."+s.replace(" ", "_") for s in speakers]
 logger.warning(speakers)
 source = data.get('source', '')
 logger.warning(source)
