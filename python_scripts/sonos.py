@@ -19,7 +19,7 @@
 """      source: tv                                   """
 
 dom = 'media_player'
-test = { "action": "join", "speakers": "living room, kitchen", "source": "tv" }
+test = { "action": "join", "speakers": "media_player.living room, media_player.kitchen" }
 sources = {'Line-in', 'TV'}
 actions = {'join', 'unjoin'}
 
@@ -37,8 +37,8 @@ if action in actions:
     else:
         service = 'sonos_unjoin'
         service_data = { "entity_id": speakers }
-    hass.async_call(dom, service, service_data )
+    hass.call(dom, service, service_data )
 
 if source is sources:
     speaker = 'media_player.study' if source == 'Line-in' else 'media_player.living_room'
-    hass.async_call(dom, 'select_source', { "entity_id": speaker, " source": source } )
+    hass.call(dom, 'select_source', { "entity_id": speaker, " source": source } )
