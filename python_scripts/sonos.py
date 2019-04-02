@@ -37,8 +37,8 @@ if action in actions:
     else:
         service = 'sonos_unjoin'
         service_data = { "entity_id": speakers }
-    hass.call(dom, service, service_data )
+    hass.services.call(dom, service, service_data )
 
 if source is sources:
     speaker = 'media_player.study' if source == 'Line-in' else 'media_player.living_room'
-    hass.call(dom, 'select_source', { "entity_id": speaker, " source": source } )
+    hass.services.call(dom, 'select_source', { "entity_id": speaker, " source": source } )
