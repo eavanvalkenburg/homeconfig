@@ -25,8 +25,8 @@ actions = {'join', 'unjoin'}
 
 action = data.get('action')
 logger.warning(action)
-speakers = data.get('speakers')
-logger.warning(type(speakers))
+speakers = data.get('speakers').split(",")
+logger.warning(speakers)
 source = data.get('source', '')
 logger.warning(source)
 
