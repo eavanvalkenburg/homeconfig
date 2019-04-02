@@ -25,7 +25,9 @@ actions = {'join', 'unjoin'}
 
 action = data.get('action')
 logger.warning(action)
-speakers = data.get('speakers').split(",")
+speakers = data.get('speakers')
+if isinstance(speakers, str):
+        speakers = [s.strip() for s in speakers.split(',')]
 logger.warning(speakers)
 source = data.get('source', '')
 logger.warning(source)
