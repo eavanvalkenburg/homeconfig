@@ -24,11 +24,11 @@ sources = {'Line-in', 'TV'}
 actions = {'join', 'unjoin'}
 
 action = data.get('action')
-logger.info(action)
+logger.warning(action)
 speakers = data.get('speakers')
-logger.info(speakers)
-source = data.get('source')
-logger.info(source)
+logger.warning(speakers)
+source = data.get('source', '')
+logger.warning(source)
 
 if action in actions:
     if action == 'join':
