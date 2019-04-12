@@ -78,3 +78,5 @@
           {% else %}
             mdi:speaker
           {% endif %}
+      # sonos_everywhere:
+      #   friendly_name: 

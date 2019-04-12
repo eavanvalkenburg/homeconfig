@@ -133,6 +133,7 @@ bin                      # Ignore lib directory
 icloud
 deps
 tts
+node-red
 # www
 .cloud
 .storage

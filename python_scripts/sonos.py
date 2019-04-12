@@ -1,37 +1,27 @@
-
-"""       Requires python_script: to be enabled in you configuration       """
-
-
-""" Usage:                                                                 """
-"""                                                                        """
-""" automation:                                                            """
-"""   alias: Refresh John's birthday sensor                                """
-"""   trigger:                                                             """
-"""     platform: time                                                     """
-"""     at: '00:00:01'                                                     """
-"""   action:                                                              """
-"""     service: python_script.date_countdown                              """
-"""     data:                                                              """
-"""       action: ungroup                                                       """
-"""       speakers: 
-            - living room
-            - study                                                   """
-"""      source: tv                                   """
+# """       Requires python_script: to be enabled in you configuration       """
+# """   action:                                                              """
+# """     service: python_script.sonos                                       """
+# """     data:                                                              """
+# """       action: unjoin/join                                              """
+# """       speakers:                                                        """
+# """         - living room                                                  """
+# """         - study                                                        """
+# """      source: blank/TV/Line-in                                          """
+# """ testjson = { "action": "join", "speakers": "living room, kitchen" }    """
 
 dom = 'media_player'
-test = { "action": "join", "speakers": "living room, kitchen" }
 sources = {'Line-in', 'TV'}
 actions = {'join', 'unjoin'}
 
 action = data.get('action')
-logger.warning(action)
+logger.info(action)
 speakers = data.get('speakers')
 if isinstance(speakers, str):
     speakers = [s.strip() for s in speakers.split(',')]
 speakers = ["media_player."+s.replace(" ", "_") for s in speakers]
-logger.warning(speakers)
+logger.info(speakers)
 source = data.get('source', '')
-logger.warning(source)
+logger.info(source)
 
 if action in actions:
     if action == 'join':
@@ -42,6 +32,6 @@ if action in actions:
         service_data = { "entity_id": speakers }
     hass.services.call(dom, service, service_data )
 
-if source is sources:
+if source in sources:
     speaker = 'media_player.study' if source == 'Line-in' else 'media_player.living_room'
     hass.services.call(dom, 'select_source', { "entity_id": speaker, " source": source } )
