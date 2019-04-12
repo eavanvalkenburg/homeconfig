@@ -17,7 +17,7 @@ import homeassistant.helpers.config_validation as cv
 from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.event import async_track_time_interval
 
-REQUIREMENTS = ['bunq-sdk>=1.10.1']
+REQUIREMENTS = ['bunq-sdk==1.10.1']
 
 _LOGGER = logging.getLogger(__name__)
 
