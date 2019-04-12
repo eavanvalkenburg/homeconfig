@@ -1,0 +1,71 @@
+  - alias: 'Start Tomato Flow'
+    id: tomato_start
+    trigger:
+      platform: state
+      entity_id: input_boolean.tomato_flow
+      to: "on"
+    action:
+      - service: timer.start
+        data_template:
+          entity_id: timer.tomato
+          duration: 00:25:00
+      - service: media_player.media_pause
+        entity_id: media_player.study
+  
+  - alias: 'Stop Tomato Flow'
+    id: tomato_stop
+    trigger:
+      platform: state
+      entity_id: input_boolean.tomato_flow
+      to: "off"
+    action:
+      - service: timer.cancel
+        entity_id: timer.tomato
+      - service: media_player.media_play
+        entity_id: media_player.study
+ 
+  - alias: 'Tomato Timer Finished - break'
+    id: tomato_finished_break
+    trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data: 
+        entity_id: timer.tomato
+    condition:
+      condition: and
+      conditions:
+      - condition: template
+        value_template: '{{ states.timer.tomato.attributes.duration == "0:25:00" }}'
+      - condition: state
+        entity_id: input_boolean.tomato_flow
+        state: 'on'
+    action:
+    - service: timer.start
+      data:
+        entity_id: timer.tomato
+        duration: 00:05:00
+    - service: media_player.media_play
+      entity_id: media_player.study
+
+  - alias: 'Tomato Timer Finished - resume'
+    id: tomato_finished_resume
+    trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data: 
+        entity_id: timer.tomato
+    condition:
+      condition: and
+      conditions:
+      - condition: template
+        value_template: '{{ states.timer.tomato.attributes.duration == "0:05:00" }}'
+      - condition: state
+        entity_id: input_boolean.tomato_flow
+        state: 'on'
+    action:
+    - service: timer.start
+      data:
+        entity_id: timer.tomato
+        duration: 00:25:00
+    - service: media_player.media_pause
+      entity_id: media_player.study

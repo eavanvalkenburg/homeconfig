@@ -70,6 +70,12 @@ media_player: !include components/mediaplayers.yaml
 cover: !include components/covers.yaml
 zone: !include components/zones.yaml
 cloud: !include components/cloud.yaml
+timer: !include components/timers.yaml
+
+input_boolean:
+  tomato_flow:
+    name: Tomato Flow
+    icon: mdi:food-apple
 
 ### direct components
 weather:
