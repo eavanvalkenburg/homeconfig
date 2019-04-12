@@ -132,6 +132,9 @@
         value_template: '{{ states.sun.sun.attributes.azimuth | float }}'
         unit_of_measurement: 'º'
       tomato_timer_left:
+        entity_id:
+        - timer.tomato
+        friendly_name: 'Tomato Timer - Time Left'
         value_template: '{{ states.timer.tomato.attributes.remaining }}'
         icon_template: mdi:clock-alert
 
