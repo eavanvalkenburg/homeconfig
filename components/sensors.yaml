@@ -131,3 +131,7 @@
       sun_azimuth:
         value_template: '{{ states.sun.sun.attributes.azimuth | float }}'
         unit_of_measurement: 'º'
+      tomato_timer_left:
+        value_template: '{{ states.timer.tomato.attributes.remaining }}'
+        icon_template: mdi:clock-alert
+
