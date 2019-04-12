@@ -10,6 +10,9 @@
       - winddirection
       - precipitation
 
+  - platform: bunq
+    api_key: !secret bunq_api_key
+
   - platform: systemmonitor
     resources:
       - type: last_boot
