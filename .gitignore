@@ -151,3 +151,4 @@ core
 .spotify-token-cache
 .homeconnect-token-cache
 links
+*token*
