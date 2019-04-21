@@ -16,6 +16,8 @@
         value_template: "{{ states.media_player.living_room.attributes.sonos_group | count == 2 and 'media_player.kitchen' in states.media_player.living_room.attributes.sonos_group }}"
         turn_on:
           service: script.sonos_kitchen_living
+        turn_off:
+          service: python_script.sonos
         icon_template: >-
           {% if states.media_player.living_room.attributes.sonos_group | count > 1 %}
             mdi:speaker-multiple
@@ -28,6 +30,8 @@
         and states.media_player.living_room.attributes.source == 'TV' }}"
         turn_on:
           - service: script.sonos_tv
+        turn_off:
+          service: python_script.sonos
         icon_template: >-
           {% if states.media_player.living_room.attributes.sonos_group | count == 3 %}
           {% if states.media_player.living_room.attributes.source == 'TV' %}
@@ -44,6 +48,8 @@
         and states.media_player.study.attributes.source == 'Line-in' }}"
         turn_on:
           service: sonos_turntable
+        turn_off:
+          service: python_script.sonos
         icon_template: >-
           {% if states.media_player.study.attributes.sonos_group | count == 3 %}
           {% if states.media_player.study.attributes.sonos_group[0] == 'media_player.study' 
@@ -66,6 +72,8 @@
           -  media_player.kitchen
           -  media_player.living_room
           -  media_player.study
+        turn_off:
+          service: python_script.sonos
         icon_template: >-
           {% if states.media_player.study.attributes.sonos_group | count == 1 
           and states.media_player.kitchen.attributes.sonos_group | count == 1 
