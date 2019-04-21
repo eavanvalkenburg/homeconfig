@@ -7,7 +7,35 @@
       - service: media_player.turn_on
         data:
           entity_id: media_player.xbox
-  sonos_ungroup_all:
-    alias: Sonos Ungroup
+  sonos_group_all:
+    alias: Sonos Group All
     sequence:
-      - service: media_player.sonos_unjoin
+      - service: python_script.sonos
+        action: join
+        speakers:
+        - living_room
+        - kitchen
+        - study
+  sonos_tv:
+    alias: Sonos TV
+    sequence: 
+    - service: python_script.sonos
+      source: TV
+  sonos_kitchen_living:
+    alias: Sonos Kitchen Living
+    sequence:
+      - service: python_script.sonos
+        action: join
+        speakers:
+        - living_room
+        - kitchen
+  sonos_turntable:
+    alias: Sonos Turntable
+    sequence:
+      - service: python_script.sonos
+        action: join
+        speakers:
+        - living_room
+        - kitchen
+        - study
+        source: Line-in
