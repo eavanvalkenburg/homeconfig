@@ -47,7 +47,7 @@
         value_template: "{{ states.media_player.study.attributes.sonos_group | count == 3 
         and states.media_player.study.attributes.source == 'Line-in' }}"
         turn_on:
-          service: sonos_turntable
+          service: script.sonos_turntable
         turn_off:
           service: python_script.sonos
         icon_template: >-
