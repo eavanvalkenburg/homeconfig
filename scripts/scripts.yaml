@@ -11,31 +11,35 @@
     alias: Sonos Group All
     sequence:
       - service: python_script.sonos
-        action: join
-        speakers:
-        - living_room
-        - kitchen
-        - study
+        data:
+          action: join
+          speakers:
+          - living_room
+          - kitchen
+          - study
   sonos_tv:
     alias: Sonos TV
     sequence: 
     - service: python_script.sonos
-      source: TV
+      data:
+        source: TV
   sonos_kitchen_living:
     alias: Sonos Kitchen Living
     sequence:
       - service: python_script.sonos
-        action: join
-        speakers:
-        - living_room
-        - kitchen
+        data:
+          action: join
+          speakers:
+          - living_room
+          - kitchen
   sonos_turntable:
     alias: Sonos Turntable
     sequence:
       - service: python_script.sonos
-        action: join
-        speakers:
-        - living_room
-        - kitchen
-        - study
-        source: Line-in
+        data:
+          action: join
+          speakers:
+          - living_room
+          - kitchen
+          - study
+          source: Line-in
