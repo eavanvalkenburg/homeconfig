@@ -36,6 +36,7 @@ sun:
 system_health:
 person:
 wake_on_lan:
+ffmpeg:
 
 http:
   base_url: https://home.eavv.nl
@@ -145,7 +146,7 @@ binary_sensor:
   - platform: ring
 camera:
   - platform: ring
-  
+
 # homeconnect:
 #   client_id: !secret homeconnect_client_id
 #   client_secret: !secret homeconnect_client_secret
