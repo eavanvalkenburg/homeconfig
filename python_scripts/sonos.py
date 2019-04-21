@@ -13,10 +13,10 @@ dom = 'media_player'
 sources = {'Line-in', 'TV'}
 actions = {'join', 'unjoin'}
 
-action = data.get('action')
+action = data.get('action','')
 logger.info(action)
 
-speakers = data.get('speakers')
+speakers = data.get('speakers','')
 if isinstance(speakers, str):
     speakers = [s.strip() for s in speakers.split(',')]
 speakers = ["media_player."+s.replace(" ", "_") for s in speakers]
