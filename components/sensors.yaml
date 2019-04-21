@@ -42,7 +42,8 @@
       - battery.charge
 
   - platform: cpuspeed
-
+  - platform: ring
+  
   # - platform: speedtest
   #   monitored_conditions:
   #     - ping
