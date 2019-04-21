@@ -62,7 +62,7 @@
             mdi:speaker
           {% endif %}
       sonos_individual:
-        friendly_name: Sonos sonos_individual
+        friendly_name: Individual Speakers
         value_template: "{{ states.media_player.study.attributes.sonos_group | count == 1 
         and states.media_player.kitchen.attributes.sonos_group | count == 1
         and states.media_player.living_room.attributes.sonos_group | count == 1}}"
