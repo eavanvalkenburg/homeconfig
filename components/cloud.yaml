@@ -1,8 +1,10 @@
   alexa:
     filter:
       include_entities:
-        - media_player.multimedia
-        - media_player.tv
-        - switch.sonos_joined
-        # - switch.xboxone
-        # - cover.blind
+        -  media_player.multimedia
+        -  media_player.tv
+        -  switch.sonos_living_and_kitchen
+        -  switch.sonos_everywhere_tv
+        -  switch.sonos_everywhere_records
+        -  switch.sonos_individual
+        -  input_boolean.tomato_flow
