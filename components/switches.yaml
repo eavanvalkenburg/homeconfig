@@ -12,7 +12,7 @@
           data:
             entity_id: media_player.xbox
       sonos_living_and_kitchen:
-        friendly_name: Sonos Living and Kitchen
+        friendly_name: Living and Kitchen
         value_template: "{{ states.media_player.living_room.attributes.sonos_group | count == 2 and 'media_player.kitchen' in states.media_player.living_room.attributes.sonos_group }}"
         turn_on:
           service: script.sonos_kitchen_living
