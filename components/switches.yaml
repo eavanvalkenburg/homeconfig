@@ -29,7 +29,7 @@
         value_template: "{{ states.media_player.living_room.attributes.sonos_group | count == 3 
         and states.media_player.living_room.attributes.source == 'TV' }}"
         turn_on:
-          - service: script.sonos_tv
+          service: script.sonos_tv
         turn_off:
           service: python_script.sonos
         icon_template: >-
