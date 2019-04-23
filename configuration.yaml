@@ -40,8 +40,8 @@ ffmpeg:
 
 http:
   base_url: https://home.eavv.nl
-  ssl_certificate: fullchain.pem
-  ssl_key: privkey.pem
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
 
 api:
 python_script:
