@@ -39,7 +39,7 @@ wake_on_lan:
 ffmpeg:
 
 http:
-  base_url: https://home.eavv.nl
+  base_url: https://ha.eavv.nl
   # ssl_certificate: /ssl/fullchain.pem
   # ssl_key: /ssl/privkey.pem
 
@@ -48,18 +48,18 @@ python_script:
 
 ### iframes
 panel_iframe:
-  nodered:
-    title: Node-RED
-    icon: mdi:sitemap
-    url: https://home.eavv.nl/hassio/ingress/a0d7b954_nodered
+  # nodered:
+  #   title: Node-RED
+  #   icon: mdi:sitemap
+  #   url: https://ha.eavv.nl/hassio/ingress/a0d7b954_nodered
   pihole:
     title: Pi-Hole
     icon: mdi:cancel
-    url: https://home.eavv.nl:4865/admin/index.php
-  vscode:
-    title: VS Code
-    icon: mdi:visual-studio-code
-    url: https://home.eavv.nl/hassio/ingress/a0d7b954_vscode
+    url: https://ha.eavv.nl:4865/admin/index.php
+  # vscode:
+  #   title: VS Code
+  #   icon: mdi:visual-studio-code
+  #   url: https://ha.eavv.nl/hassio/ingress/a0d7b954_vscode
 
 ### included components, automations and scripts
 sensor: !include components/sensors.yaml
