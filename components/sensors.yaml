@@ -21,7 +21,8 @@
         arg: /
 
   - platform: pi_hole
-    host: homeserver:4865
+    host: localhost
+    ssl: true
     monitored_conditions:
       - ads_blocked_today
       - dns_queries_today
