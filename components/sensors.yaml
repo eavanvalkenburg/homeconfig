@@ -21,7 +21,7 @@
         arg: /
 
   - platform: pi_hole
-    host: !secret host_ip
+    host: !secret pihole_address
     ssl: true
     monitored_conditions:
       - ads_blocked_today
