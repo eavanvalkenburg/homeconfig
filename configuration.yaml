@@ -40,8 +40,8 @@ ffmpeg:
 
 http:
   base_url: https://ha.eavv.nl
-  ssl_certificate: fullchain.pem
-  ssl_key: privkey.pem
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
 
 api:
 python_script:
@@ -55,7 +55,7 @@ panel_iframe:
   pihole:
     title: Pi-Hole
     icon: mdi:cancel
-    url: https://ha.eavv.nl:4865/admin/index.php
+    url: https://www.eavv.nl:4865/admin/index.php
   # vscode:
   #   title: VS Code
   #   icon: mdi:visual-studio-code
