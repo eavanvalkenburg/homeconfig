@@ -37,6 +37,7 @@ system_health:
 person:
 wake_on_lan:
 ffmpeg:
+mobile_app:
 
 http:
   base_url: https://ha.eavv.nl

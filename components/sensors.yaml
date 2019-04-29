@@ -23,6 +23,7 @@
   - platform: pi_hole
     host: !secret pihole_address
     ssl: true
+    verify_ssl: true
     monitored_conditions:
       - ads_blocked_today
       - dns_queries_today
