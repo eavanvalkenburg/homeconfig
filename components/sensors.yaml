@@ -93,7 +93,7 @@
     type: count
     end: '{{ now() }}'
     duration: 
-      minutes: 60
+      minutes: 30
 
   - platform: template
     sensors:
