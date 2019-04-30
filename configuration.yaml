@@ -51,18 +51,22 @@ python_script:
 
 ### iframes
 panel_iframe:
-  # nodered:
-  #   title: Node-RED
-  #   icon: mdi:sitemap
-  #   url: https://ha.eavv.nl/hassio/ingress/a0d7b954_nodered
   pihole:
     title: Pi-Hole
     icon: mdi:cancel
-    url: https://www.eavv.nl:4865/admin/index.php
-  # vscode:
-  #   title: VS Code
-  #   icon: mdi:visual-studio-code
-  #   url: https://ha.eavv.nl/hassio/ingress/a0d7b954_vscode
+    url: !secret pihole_address
+  sonarr:
+    title: Sonarr
+    icon: mdi:television-classic
+    url: !secret sonarr_address
+  couchpotato:
+    title: Couchpotato
+    icon: mdi:filmstrip
+    url: !secret cp_address
+  sabnzbd:
+    title: Sabnzbd
+    icon: mdi:arrow-down-bold-hexagon-outline
+    url: !secret sab_address
 
 ### included components, automations and scripts
 sensor: !include components/sensors.yaml
