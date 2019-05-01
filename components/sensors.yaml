@@ -21,7 +21,7 @@
         arg: /
 
   - platform: pi_hole
-    host: !secret pihole_address
+    host: !secret host_ip
     location: admin
     ssl: true
     verify_ssl: true
