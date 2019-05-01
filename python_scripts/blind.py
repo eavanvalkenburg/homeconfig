@@ -12,9 +12,9 @@ sun_azimuth = float(hass.states.get('sensor.sun_azimuth').state)
 clear_day_sensor =  int(hass.states.get('sensor.clear_day').state)
 clear_day = True if clear_day_sensor > 0 else False
 
-logger.warning('current height: ' + str(blind_height))
-logger.warning(sun_elevation)
-logger.warning(clear_day)
+# logger.warning('current height: ' + str(blind_height))
+# logger.warning(sun_elevation)
+# logger.warning(clear_day)
 
 sun = { 
     "elevation_min": 14,
@@ -40,6 +40,6 @@ and sun_azimuth < sun["azimuth_max"] \
 and sun_azimuth > sun["azimuth_min"]:
     new_position = ((15*sun_elevation*sun_elevation)/77)-((1005*sun_elevation)/77)+(2690/11)
 
-logger.warning(new_position)
+# logger.warning(new_position)
 if blind_height != new_position:
     hass.services.call('cover', 'set_cover_position', {'entity_id': blind_name, "position": new_position})
