@@ -22,6 +22,7 @@
 
   - platform: pi_hole
     host: !secret pihole_address
+    location: admin
     ssl: true
     verify_ssl: true
     monitored_conditions:
