@@ -24,6 +24,19 @@
           {% else %}
             mdi:speaker
           {% endif %}
+      sonos_everywhere:
+        friendly_name: Sonos Everywhere
+        value_template: "{{ states.media_player.living_room.attributes.sonos_group | count == 3 }}"
+        turn_on:
+          service: script.sonos_group_all
+        turn_off:
+          service: python_script.sonos
+        icon_template: >-
+          {% if states.media_player.living_room.attributes.sonos_group | count == 3 %}
+            mdi:speaker-multiple
+          {% else %}
+            mdi:speaker
+          {% endif %}
       sonos_everywhere_tv:
         friendly_name: TV Everywhere
         value_template: "{{ states.media_player.living_room.attributes.sonos_group | count == 3 
