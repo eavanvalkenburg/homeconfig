@@ -21,8 +21,7 @@
         arg: /
 
   - platform: pi_hole
-    host: !secret host_ip
-    location: admin
+    host: !secret pihole_address
     ssl: true
     verify_ssl: true
     monitored_conditions:
