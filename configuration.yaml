@@ -54,7 +54,7 @@ panel_iframe:
   pihole:
     title: Pi-Hole
     icon: mdi:cancel
-    url: !secret pihole_address
+    url: !secret pihole_address_fe
   sonarr:
     title: Sonarr
     icon: mdi:television-classic
@@ -63,10 +63,6 @@ panel_iframe:
     title: Couchpotato
     icon: mdi:filmstrip
     url: !secret cp_address
-  sabnzbd:
-    title: Sabnzbd
-    icon: mdi:arrow-down-bold-hexagon-outline
-    url: !secret sab_address
 
 ### included components, automations and scripts
 sensor: !include components/sensors.yaml
