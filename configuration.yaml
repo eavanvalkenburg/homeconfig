@@ -22,7 +22,10 @@ azure_eventhub:
   event_hub_address: !secret eh_sas_address
   event_hub_sas_policy: !secret eh_sas_policy
   event_hub_sas_key: !secret eh_sas_key
-
+  filter:
+    include_domains:
+    - homeassistant
+    - lights
 logbook:
   exclude:
     entities:
