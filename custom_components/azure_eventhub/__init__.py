@@ -44,7 +44,6 @@ def setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
 
     client = EventHubClientAsync(
         event_hub_address,
-        debug=True,
         username=event_hub_sas_policy,
         password=event_hub_sas_key)
 
