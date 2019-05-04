@@ -39,7 +39,6 @@ def setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
     event_hub_address = config[CONF_EVENT_HUB_ADDRESS]
     event_hub_sas_policy = config[CONF_EVENT_HUB_SAS_POLICY]
     event_hub_sas_key = config[CONF_EVENT_HUB_SAS_KEY]
-
     entities_filter = config[CONF_FILTER]
 
     client = EventHubClientAsync(
