@@ -18,6 +18,11 @@ updater:
 discovery:
 conversation:
 history:
+azure_eventhub:
+  event_hub_address: !secret eh_sas_address
+  event_hub_sas_policy: !secret eh_sas_policy
+  event_hub_sas_key: !secret eh_sas_key
+
 logbook:
   exclude:
     entities:
@@ -155,9 +160,9 @@ camera:
 #   client_id: !secret homeconnect_client_id
 #   client_secret: !secret homeconnect_client_secret
 
-# logger:
-#   default: warning
-#   logs:
-#     custom_components.homeconnect: debug
+logger:
+  default: warning
+  logs:
+    custom_components.azure_eventhub: debug
 #     homeassistant.components.sonos: debug
 #     homeassistant.components.media_player.sonos: debug
