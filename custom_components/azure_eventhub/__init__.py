@@ -54,8 +54,7 @@ def setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
     encoder = DateTimeJSONEncoder()
 
     async def send_to_eventhub(event: Event):
-        """Send states to EH."""
-        state = event.data.get('new_state')
+        """Send states to         state = event.data.get('new_state')
         if (state is None
                 or state.state in (STATE_UNKNOWN, '', STATE_UNAVAILABLE)
                 or not entities_filter(state.entity_id)):
