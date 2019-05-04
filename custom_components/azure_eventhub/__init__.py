@@ -39,10 +39,12 @@ def setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
     event_hub_address = config[CONF_EVENT_HUB_ADDRESS]
     event_hub_sas_policy = config[CONF_EVENT_HUB_SAS_POLICY]
     event_hub_sas_key = config[CONF_EVENT_HUB_SAS_KEY]
+
     entities_filter = config[CONF_FILTER]
 
     client = EventHubClientAsync(
         event_hub_address,
+        debug=True,
         username=event_hub_sas_policy,
         password=event_hub_sas_key)
 
@@ -52,7 +54,8 @@ def setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
     encoder = DateTimeJSONEncoder()
 
     async def send_to_eventhub(event: Event):
-        """Send states to         state = event.data.get('new_state')
+        """Send states to Pub/Sub."""
+        state = event.data.get('new_state')
         if (state is None
                 or state.state in (STATE_UNKNOWN, '', STATE_UNAVAILABLE)
                 or not entities_filter(state.entity_id)):
