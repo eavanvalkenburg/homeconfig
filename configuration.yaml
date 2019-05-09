@@ -25,7 +25,8 @@ azure_eventhub:
   filter:
     include_domains:
     - homeassistant
-    - lights
+    - light
+    - media_player
 logbook:
   exclude:
     entities:
