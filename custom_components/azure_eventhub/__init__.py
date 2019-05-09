@@ -67,7 +67,7 @@ def setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
                 default=encoder.encode
             ).encode('utf-8')
         )
-        await sender.send(event_data)
+        sender.send(event_data)
 
     hass.bus.listen(EVENT_STATE_CHANGED, send_to_eventhub)
 
