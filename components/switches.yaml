@@ -39,8 +39,7 @@
           {% endif %}
       sonos_everywhere_tv:
         friendly_name: TV Everywhere
-        value_template: "{{ states.media_player.living_room.attributes.sonos_group | count == 3 
-        and states.media_player.living_room.attributes.source == 'TV' }}"
+        value_template: "{{ states.media_player.living_room.attributes.sonos_group | count == 3 and states.media_player.living_room.attributes.source == 'TV' }}"
         turn_on:
           service: script.sonos_tv
         turn_off:
@@ -58,7 +57,7 @@
       sonos_everywhere_records:
         friendly_name: Records Everywhere
         value_template: "{{ states.media_player.study.attributes.sonos_group | count == 3 
-        and states.media_player.study.attributes.source == 'Line-in' }}"
+          and states.media_player.study.attributes.source == 'Line-in' }}"
         turn_on:
           service: script.sonos_turntable
         turn_off:
@@ -77,8 +76,8 @@
       sonos_individual:
         friendly_name: Individual Speakers
         value_template: "{{ states.media_player.study.attributes.sonos_group | count == 1 
-        and states.media_player.kitchen.attributes.sonos_group | count == 1
-        and states.media_player.living_room.attributes.sonos_group | count == 1}}"
+          and states.media_player.kitchen.attributes.sonos_group | count == 1 
+          and states.media_player.living_room.attributes.sonos_group | count == 1}}"
         turn_on:
           service:  media_player.sonos_unjoin
           entity_id: 

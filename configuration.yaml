@@ -2,7 +2,7 @@ homeassistant:
   name: Home
   latitude: !secret lat
   longitude: !secret long
-  elevation: 1
+  elevation: 1  
   unit_system: metric
   time_zone: Europe/Amsterdam
   customize: !include components/customize.yaml
@@ -166,6 +166,4 @@ camera:
 logger:
   default: warning
   logs:
-    custom_components.azure_eventhub: debug
-#     homeassistant.components.sonos: debug
-#     homeassistant.components.media_player.sonos: debug
+    custom_components.azure_eventhub: ""
