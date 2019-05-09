@@ -7,7 +7,7 @@ from typing import Any, Dict
 import voluptuous as vol
 
 from homeassistant.const import (
-    EVENT_STATE_CHANGED, STATE_UNAVAILABLE, STATE_UNKNOWN)
+    EVENT_STATE_CHANGED, STATE_UNAVAILABLE, STATE_UNKNOWN, EVENT_HOMEASSISTANT_STOP)
 from homeassistant.core import Event, HomeAssistant
 import homeassistant.helpers.config_validation as cv
 from homeassistant.helpers.entityfilter import FILTER_SCHEMA
@@ -33,7 +33,7 @@ CONFIG_SCHEMA = vol.Schema({
 
 def setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
     """Activate Azure EH component."""
-    from azure.eventhub import EventData, EventHubClientAsync, AsyncSender
+    from azure.eventhub import EventData, EventHubClient, Sender
 
     config = yaml_config[DOMAIN]
     event_hub_address = config[CONF_EVENT_HUB_ADDRESS]
@@ -42,14 +42,14 @@ def setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
 
     entities_filter = config[CONF_FILTER]
 
-    client = EventHubClientAsync(
+    client = EventHubClient(
         event_hub_address,
         debug=True,
         username=event_hub_sas_policy,
         password=event_hub_sas_key)
 
-    sender = client.add_async_sender()
-    client.run_async()
+    sender = client.add_sender()
+    client.run()
 
     encoder = DateTimeJSONEncoder()
 
@@ -67,11 +67,18 @@ def setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
                 default=encoder.encode
             ).encode('utf-8')
         )
-
         await sender.send(event_data)
 
     hass.bus.listen(EVENT_STATE_CHANGED, send_to_eventhub)
+
+    def shutdown(event: Event):
+        """Shut down the thread."""
+        client.stop()
+
+    hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, shutdown)
+
     return True
+
 
 
 class DateTimeJSONEncoder(json.JSONEncoder):
