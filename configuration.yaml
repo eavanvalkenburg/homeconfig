@@ -166,4 +166,4 @@ camera:
 logger:
   default: warning
   logs:
-    custom_components.azure_eventhub: ""
+    custom_components.azure_eventhub: "debug"
