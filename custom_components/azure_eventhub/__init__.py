@@ -34,7 +34,7 @@ CONFIG_SCHEMA = vol.Schema({
 
 async def async_setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
     """Activate Azure EH component."""
-    from azure.eventhub import EventData, EventHubClientAsync, AsyncSender
+    from azure.eventhub import EventData, EventHubClientAsync
 
     config = yaml_config[DOMAIN]
     event_hub_address = config[CONF_EVENT_HUB_ADDRESS]
@@ -54,7 +54,6 @@ async def async_setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
 
     encoder = DateTimeJSONEncoder()
 
-    # @callback
     async def async_send_to_eventhub(event: Event):
         """Send states to Pub/Sub."""
         state = event.data.get('new_state')
