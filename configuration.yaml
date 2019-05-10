@@ -19,7 +19,8 @@ discovery:
 conversation:
 history:
 azure_eventhub:
-  event_hub_address: !secret eh_sas_address
+  event_hub_namespace: !secret eh_sas_ns
+  event_hub_instance_name:  !secret eh_sas_instance
   event_hub_sas_policy: !secret eh_sas_policy
   event_hub_sas_key: !secret eh_sas_key
   filter:
