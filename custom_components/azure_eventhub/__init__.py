@@ -32,7 +32,7 @@ CONFIG_SCHEMA = vol.Schema({
 }, extra=vol.ALLOW_EXTRA)
 
 
-async def setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
+async def async_setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
     """Activate Azure EH component."""
     from azure.eventhub import EventData, EventHubClientAsync, AsyncSender
 
@@ -54,6 +54,7 @@ async def setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
 
     encoder = DateTimeJSONEncoder()
 
+    # @callback
     async def async_send_to_eventhub(event: Event):
         """Send states to Pub/Sub."""
         state = event.data.get('new_state')
@@ -70,12 +71,11 @@ async def setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
         )
         await sender.send(event_data)
 
-    hass.bus.async_listen(EVENT_STATE_CHANGED, async_send_to_eventhub)
-
     async def async_shutdown(event: Event):
         """Shut down the thread."""
         await client.stop()
 
+    hass.bus.async_listen(EVENT_STATE_CHANGED, async_send_to_eventhub)
     hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, async_shutdown)
 
     return True
