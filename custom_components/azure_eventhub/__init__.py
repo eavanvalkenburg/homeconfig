@@ -54,7 +54,7 @@ async def setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
 
     encoder = DateTimeJSONEncoder()
 
-    async def send_to_eventhub(event: Event):
+    async def async_send_to_eventhub(event: Event):
         """Send states to Pub/Sub."""
         state = event.data.get('new_state')
         if (state is None
@@ -70,13 +70,13 @@ async def setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
         )
         await sender.send(event_data)
 
-    hass.bus.listen(EVENT_STATE_CHANGED, send_to_eventhub)
+    hass.bus.async_listen(EVENT_STATE_CHANGED, async_send_to_eventhub)
 
-    def shutdown(event: Event):
+    async def async_shutdown(event: Event):
         """Shut down the thread."""
-        client.stop()
+        await client.stop()
 
-    hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, shutdown)
+    hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, async_shutdown)
 
     return True
 
