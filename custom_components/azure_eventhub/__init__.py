@@ -2,6 +2,7 @@
 import datetime
 import json
 import logging
+import asyncio
 from typing import Any, Dict
 
 import voluptuous as vol
@@ -31,9 +32,9 @@ CONFIG_SCHEMA = vol.Schema({
 }, extra=vol.ALLOW_EXTRA)
 
 
-def setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
+async def setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
     """Activate Azure EH component."""
-    from azure.eventhub import EventData, EventHubClient, Sender
+    from azure.eventhub import EventData, EventHubClientAsync, AsyncSender
 
     config = yaml_config[DOMAIN]
     event_hub_address = config[CONF_EVENT_HUB_ADDRESS]
@@ -42,14 +43,14 @@ def setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
 
     entities_filter = config[CONF_FILTER]
 
-    client = EventHubClient(
+    client = EventHubClientAsync(
         event_hub_address,
         debug=True,
         username=event_hub_sas_policy,
         password=event_hub_sas_key)
 
-    sender = client.add_sender()
-    client.run()
+    sender = client.add_async_sender()
+    await client.run_async()
 
     encoder = DateTimeJSONEncoder()
 
@@ -67,7 +68,7 @@ def setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
                 default=encoder.encode
             ).encode('utf-8')
         )
-        sender.send(event_data)
+        await sender.send(event_data)
 
     hass.bus.listen(EVENT_STATE_CHANGED, send_to_eventhub)
 
@@ -78,7 +79,6 @@ def setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
     hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, shutdown)
 
     return True
-
 
 
 class DateTimeJSONEncoder(json.JSONEncoder):
