@@ -18,7 +18,7 @@ updater:
 discovery:
 conversation:
 history:
-azure_eventhub:
+azure_event_hub:
   event_hub_namespace: !secret eh_sas_ns
   event_hub_instance_name:  !secret eh_sas_instance
   event_hub_sas_policy: !secret eh_sas_policy
