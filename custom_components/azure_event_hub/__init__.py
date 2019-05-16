@@ -3,9 +3,10 @@ import datetime
 import json
 import logging
 from typing import Any, Dict
-from azure.eventhub import EventData, EventHubClientAsync
 
 import voluptuous as vol
+
+from azure.eventhub import EventData, EventHubClientAsync
 
 from homeassistant.const import (
     EVENT_HOMEASSISTANT_STOP, EVENT_STATE_CHANGED, STATE_UNAVAILABLE,
@@ -37,7 +38,6 @@ CONFIG_SCHEMA = vol.Schema({
 
 async def async_setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
     """Activate Azure EH component."""
-
     config = yaml_config[DOMAIN]
 
     event_hub_address = "amqps://{}.servicebus.windows.net/{}".format(
@@ -53,8 +53,7 @@ async def async_setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
     async_sender = client.add_async_sender()
     await client.run_async()
 
-    # encoder = DateTimeJSONEncoder()
-    json.JSONEncoder.default = lambda self,obj: (obj.isoformat() if isinstance(obj, datetime.datetime) else None)
+    encoder = DateTimeJSONEncoder()
 
     async def async_send_to_event_hub(event: Event):
         """Send states to Event Hub."""
@@ -64,11 +63,10 @@ async def async_setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
                 or not entities_filter(state.entity_id)):
             return
 
-
         event_data = EventData(
             json.dumps(
-                obj=state.as_dict()#,
-                # default=encoder.encode
+                obj=state.as_dict(),
+                default=encoder.encode
             ).encode('utf-8')
         )
         await async_sender.send(event_data)
@@ -83,15 +81,14 @@ async def async_setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
     return True
 
 
-# class DateTimeJSONEncoder(json.JSONEncoder):
-#     """Encode python objects.
+class DateTimeJSONEncoder(json.JSONEncoder):
+    """Encode datetime objects.
 
-#     Additionally add encoding for datetime objects as isoformat.
-#     """
+    Additionally add encoding for datetime objects as isoformat.
+    """
 
-#     @staticmethod
-#     def default(data):  # pylint: disable=E0202
-#         """Implement encoding logic."""
-#         if isinstance(data, datetime.datetime):
-#             return data.isoformat()
-#         return super().default(data)
+    def default(self, o):  # pylint: disable=E0202
+        """Implement encoding logic."""
+        if isinstance(o, datetime.datetime):
+            return o.isoformat()
+        return super().default(o)

@@ -1,0 +1,8 @@
+{
+    "domain": "xboxone",
+    "name": "XboxOne",
+    "documentation": "https://www.home-assistant.io/components/xboxone",
+    "requirements": [],
+    "dependencies": [],
+    "codeowners": []
+  }
