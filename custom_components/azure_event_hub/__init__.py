@@ -5,7 +5,6 @@ import logging
 from typing import Any, Dict
 
 import voluptuous as vol
-
 from azure.eventhub import EventData, EventHubClientAsync
 
 from homeassistant.const import (
@@ -14,6 +13,7 @@ from homeassistant.const import (
 from homeassistant.core import Event, HomeAssistant
 import homeassistant.helpers.config_validation as cv
 from homeassistant.helpers.entityfilter import FILTER_SCHEMA
+from homeassistant.helpers.json import JSONEncoder
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -53,7 +53,7 @@ async def async_setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
     async_sender = client.add_async_sender()
     await client.run_async()
 
-    encoder = DateTimeJSONEncoder()
+    encoder = JSONEncoder()
 
     async def async_send_to_event_hub(event: Event):
         """Send states to Event Hub."""
@@ -81,14 +81,15 @@ async def async_setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
     return True
 
 
-class DateTimeJSONEncoder(json.JSONEncoder):
-    """Encode datetime objects.
+# class DateTimeJSONEncoder(json.JSONEncoder):
+#     """Encode datetime objects.
 
-    Additionally add encoding for datetime objects as isoformat.
-    """
+#     Additionally add encoding for datetime objects as isoformat.
+#     """
 
-    def default(self, o):  # pylint: disable=E0202
-        """Implement encoding logic."""
-        if isinstance(o, datetime.datetime):
-            return o.isoformat()
-        return super().default(o)
+#     # pylint: disable=method-hidden
+#     def default(self, o):
+#         """Implement encoding logic."""
+#         if isinstance(o, datetime.datetime):
+#             return o.isoformat()
+#         return super().default(o)
