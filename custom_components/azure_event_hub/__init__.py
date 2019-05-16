@@ -3,6 +3,7 @@ import datetime
 import json
 import logging
 from typing import Any, Dict
+from azure.eventhub import EventData, EventHubClientAsync
 
 import voluptuous as vol
 
@@ -36,7 +37,6 @@ CONFIG_SCHEMA = vol.Schema({
 
 async def async_setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
     """Activate Azure EH component."""
-    from azure.eventhub import EventData, EventHubClientAsync
 
     config = yaml_config[DOMAIN]
 
@@ -73,7 +73,7 @@ async def async_setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
 
     async def async_shutdown(event: Event):
         """Shut down the client."""
-        await client.stop()
+        await client.stop_async()
 
     hass.bus.async_listen(EVENT_STATE_CHANGED, async_send_to_event_hub)
     hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, async_shutdown)
@@ -87,8 +87,9 @@ class DateTimeJSONEncoder(json.JSONEncoder):
     Additionally add encoding for datetime objects as isoformat.
     """
 
-    def default(self, o):  # pylint: disable=E0202
+    @staticmethod
+    def default(data):  # pylint: disable=E0202
         """Implement encoding logic."""
-        if isinstance(o, datetime.datetime):
-            return o.isoformat()
-        return super().default(o)
+        if isinstance(data, datetime.datetime):
+            return data.isoformat()
+        return super().default(data)
