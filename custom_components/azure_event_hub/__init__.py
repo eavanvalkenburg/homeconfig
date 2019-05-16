@@ -53,7 +53,8 @@ async def async_setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
     async_sender = client.add_async_sender()
     await client.run_async()
 
-    encoder = DateTimeJSONEncoder()
+    # encoder = DateTimeJSONEncoder()
+    json.JSONEncoder.default = lambda self,obj: (obj.isoformat() if isinstance(obj, datetime.datetime) else None)
 
     async def async_send_to_event_hub(event: Event):
         """Send states to Event Hub."""
@@ -63,10 +64,11 @@ async def async_setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
                 or not entities_filter(state.entity_id)):
             return
 
+
         event_data = EventData(
             json.dumps(
-                obj=state.as_dict(),
-                default=encoder.encode
+                obj=state.as_dict()#,
+                # default=encoder.encode
             ).encode('utf-8')
         )
         await async_sender.send(event_data)
@@ -81,15 +83,15 @@ async def async_setup(hass: HomeAssistant, yaml_config: Dict[str, Any]):
     return True
 
 
-class DateTimeJSONEncoder(json.JSONEncoder):
-    """Encode python objects.
+# class DateTimeJSONEncoder(json.JSONEncoder):
+#     """Encode python objects.
 
-    Additionally add encoding for datetime objects as isoformat.
-    """
+#     Additionally add encoding for datetime objects as isoformat.
+#     """
 
-    @staticmethod
-    def default(data):  # pylint: disable=E0202
-        """Implement encoding logic."""
-        if isinstance(data, datetime.datetime):
-            return data.isoformat()
-        return super().default(data)
+#     @staticmethod
+#     def default(data):  # pylint: disable=E0202
+#         """Implement encoding logic."""
+#         if isinstance(data, datetime.datetime):
+#             return data.isoformat()
+#         return super().default(data)
