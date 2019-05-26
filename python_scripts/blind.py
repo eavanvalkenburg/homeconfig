@@ -3,7 +3,7 @@ blind_name = 'cover.blind'
 blind_state = hass.states.get(blind_name)
 blind_height = blind_state.attributes.get('current_position')
 
-temp_inside = float(hass.states.get('sensor.study_temperature').state)
+temp_inside = float(hass.states.get('sensor.study_sensor_temperature').state)
 temp_outside = float(hass.states.get('sensor.weather_temperature').state)
 
 sun_elevation = float(hass.states.get('sensor.sun_elevation').state)
