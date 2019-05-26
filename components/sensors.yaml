@@ -108,6 +108,11 @@
     streetnumber: !secret huisnummer
     upcomingsensor: 1
 
+  # - platform: rest
+  #   name: "Alexa Alarms"
+  #   resource: https://alexa.amazon.com/api/notifications
+  # needs auth request
+
   - platform: template
     sensors:
       total_packages:
