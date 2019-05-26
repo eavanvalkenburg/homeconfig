@@ -29,7 +29,7 @@ temp_thresholds = {
     }
 
 new_position = 100
-if sun_elevation < 0:
+if sun_elevation < 1:
     new_position = 0
 if  clear_day \
 and temp_inside > temp_thresholds["inside"] \
