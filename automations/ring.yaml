@@ -1,0 +1,20 @@
+  - alias: ringed
+    trigger:   
+    - platform: state
+      entity_id: binary_sensor.ring_ringing
+      to: 'On'
+    action:
+      - service: python_script.ring
+  - alias: ring_battery
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.ring_front_door_battery
+        below: 20
+    action:
+      - service: notify.mobile_app_eduards_iphone
+        data:
+          title: "Ring battery level"
+          message: "The ring battery level is getting lower!"
+          data:
+            push:
+              badge: sensor.ring_front_door_battery

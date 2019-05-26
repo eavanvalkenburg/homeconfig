@@ -167,4 +167,3 @@
         friendly_name: 'Tomato Timer - Time Left'
         value_template: '{{ states.timer.tomato.attributes.remaining }}'
         icon_template: mdi:clock-alert
-
