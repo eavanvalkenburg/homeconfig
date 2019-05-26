@@ -98,6 +98,16 @@
     duration: 
       minutes: 30
 
+  - platform: afvalbeheer
+    wastecollector: Avalex
+    resources:
+      - restafval
+      - gft
+      - papier
+    postcode: !secret postcode
+    streetnumber: !secret huisnummer
+    upcomingsensor: 1
+
   - platform: template
     sensors:
       total_packages:

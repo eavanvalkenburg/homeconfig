@@ -9,7 +9,8 @@
 # """      source: blank/TV/Line-in                                          """
 # """ testjson = { "action": "join", "speakers": "living room, kitchen" }    """
 
-dom = 'media_player'
+media_dom = 'media_player'
+sonos_dom = 'sonos'
 sources = {'Line-in', 'TV'}
 actions = {'join', 'unjoin'}
 
@@ -27,8 +28,8 @@ logger.info(source)
 
 if source in sources:
     speaker = 'media_player.study' if source == 'Line-in' else 'media_player.living_room'
-    hass.services.call(dom, 'select_source', { "entity_id": speaker, " source": source } )
-    hass.services.call(dom, 'media_play', { "entity_id": speaker, })
+    hass.services.call(media_dom, 'select_source', { "entity_id": speaker, " source": source } )
+    hass.services.call(media_dom, 'media_play', { "entity_id": speaker, })
 
 #get current state from all speakers
 states = {}
@@ -43,10 +44,10 @@ if action in actions:
                 master = key
                 break
         speakers.remove(master)
-        service = 'sonos_join' 
+        service = 'join' 
         service_data = { "master": master, "entity_id": speakers }
     else:
-        service = 'sonos_unjoin'
+        service = 'unjoin'
         service_data = { "entity_id": speakers }
-    hass.services.call(dom, service, service_data )
+    hass.services.call(sonos_dom, service, service_data )
 

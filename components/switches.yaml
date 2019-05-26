@@ -80,7 +80,7 @@
         and states.media_player.kitchen.attributes.sonos_group | count == 1
         and states.media_player.living_room.attributes.sonos_group | count == 1}}"
         turn_on:
-          service:  media_player.sonos_unjoin
+          service:  sonos.unjoin
           entity_id: 
           -  media_player.kitchen
           -  media_player.living_room
