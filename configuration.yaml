@@ -160,9 +160,10 @@ camera:
 #   client_id: !secret homeconnect_client_id
 #   client_secret: !secret homeconnect_client_secret
 
-# logger:
-#   default: warning
-#   logs:
-#     custom_components.homeconnect: debug
-#     homeassistant.components.sonos: debug
-#     homeassistant.components.media_player.sonos: debug
+logger:
+  default: warning
+  logs:
+    homeassistant.components.python_script: debug
+    # custom_components.homeconnect: debug
+    # homeassistant.components.sonos: debug
+    # homeassistant.components.media_player.sonos: debug

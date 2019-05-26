@@ -1,4 +1,4 @@
-import asyncio
+
 media_dom = 'media_player'
 
 sonos_to_check = \
@@ -8,29 +8,32 @@ sonos_to_check = \
 
 plex = 'media_player.xboxone_plex'
 plex_state = hass.states.get(plex)
-logger.info(plex_state)
-if plex_state == 'playing':
-    logger.info('Pausing plex (when running)')
-    # hass.services.call(media_dom, 'media_pause', {"entity_id": plex})
-else:
-    logger.info(f'No pausing {plex} is {plex_state}')
+# logger.debug(plex_state)
+# logger.debug(plex_state.attributes)
+if plex_state.state == 'playing':
+    logger.debug('Pausing plex (when running)')
+    hass.services.call(media_dom, 'media_pause', {"entity_id": plex})
+# else:
+#     logger.debug('No pausing {}, state is {}'.format(plex, plex_state))
 
+states = {}
 for speaker in sonos_to_check:
-    state = hass.states.get(speaker)
-    if state == 'playing':
-        logger.info(state)
-        volume_level = state.get('volume_level', 0.2)
+    states[speaker] = hass.states.get(speaker)
+
+for speaker, state in states.items():
+    if state.state == 'playing':
+        # logger.debug(state)
+        volume_level = state.attributes.get('volume_level', 0.2)
         service_data = { "entity_id": speaker, "volume_level": volume_level/2 }
-        logger.info(f'Setting volume of {speaker} to {volume_level/2}')
-        # hass.services.call(media_dom, 'volume_set', service_data)
+        # logger.debug('Setting volume of {} to {}'.format(speaker, volume_level/2))
+        hass.services.call(media_dom, 'volume_set', service_data)
 
-asyncio.sleep(300)
+time.sleep(120)
 
-for speaker in sonos_to_check:
-    state = hass.states.get(speaker)
-    if state == 'playing':
-        logger.info(state)
-        volume_level = state.get('volume_level', 0.1)
-        service_data = { "entity_id": speaker, "volume_level": volume_level*2 }
-        logger.info(f'Setting volume of {speaker} to {volume_level*2}')
-        # hass.services.call(media_dom, 'volume_set', service_data)
+for speaker, state in states.items():
+    if state.state == 'playing':
+        # logger.debug(state)
+        volume_level = state.attributes.get('volume_level', 0.1)
+        service_data = { "entity_id": speaker, "volume_level": volume_level }
+        # logger.debug('Setting volume of {} to {}'.format(speaker, volume_level))
+        hass.services.call(media_dom, 'volume_set', service_data)

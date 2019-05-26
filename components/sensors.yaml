@@ -79,9 +79,8 @@
     username: !secret ups_username
     password: !secret ups_password
 
-  # - platform: hue_sensor
-  #   ip_address: !secret hue_ip
-  #   token: !secret hue_key
+  - platform: cert_expiry
+    host: ha.eavv.nl
 
   - platform: alpha_vantage
     api_key: !secret alpha_vantage_key
