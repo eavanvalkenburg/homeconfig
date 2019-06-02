@@ -18,7 +18,7 @@ clear_day = True if clear_day_sensor > 0 else False
 
 sun = { 
     "elevation_min": 14,
-    "elevation_max": 53,
+    "elevation_max": 60,
     "azimuth_min": 162,
     "azimuth_max": 250
     }
