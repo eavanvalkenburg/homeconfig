@@ -10,7 +10,7 @@ sun_elevation = float(hass.states.get('sensor.sun_elevation').state)
 sun_azimuth = float(hass.states.get('sensor.sun_azimuth').state)
 
 clear_day_sensor =  int(hass.states.get('sensor.clear_day').state)
-clear_day = True if clear_day_sensor > 0 else False
+clear_day = True if clear_day_sensor > 0 else True
 
 # logger.warning('current height: ' + str(blind_height))
 # logger.warning(sun_elevation)
