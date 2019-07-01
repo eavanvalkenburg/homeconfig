@@ -75,18 +75,18 @@
     username: !secret postnl_un
     password: !secret postnl_pw
 
-  - platform: ups
-    username: !secret ups_username
-    password: !secret ups_password
+  # - platform: ups
+  #   username: !secret ups_username
+  #   password: !secret ups_password
 
   - platform: cert_expiry
     host: ha.eavv.nl
 
-  - platform: alpha_vantage
-    api_key: !secret alpha_vantage_key
-    symbols:
-    - symbol: MSFT
-      name: Microsoft
+  # - platform: alpha_vantage
+  #   api_key: !secret alpha_vantage_key
+  #   symbols:
+  #   - symbol: MSFT
+  #     name: Microsoft
 
   - platform: history_stats
     name: Clear day
@@ -114,10 +114,10 @@
 
   - platform: template
     sensors:
-      total_packages:
-        friendly_name: Total packages
-        unit_of_measurement: 'packages'
-        value_template: "{{ states('sensor.postnl')|int + states('sensor.ups')|int }}"
+      # total_packages:
+      #   friendly_name: Total packages
+      #   unit_of_measurement: 'packages'
+      #   value_template: "{{ states('sensor.postnl')|int + states('sensor.ups')|int }}"
       hassuptime:
           friendly_name: "HASS Uptime"
           value_template: >-
