@@ -20,7 +20,7 @@ sun = {
     "elevation_min": 14,
     "elevation_max": 60,
     "azimuth_min": 162,
-    "azimuth_max": 250
+    "azimuth_max": 255
     }
 
 temp_thresholds = { 
