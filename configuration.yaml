@@ -51,8 +51,8 @@ mobile_app:
 
 http:
   base_url: https://ha.eavv.nl
-  ssl_certificate: /ssl/fullchain.pem
-  ssl_key: /ssl/privkey.pem
+  ssl_certificate: /ssl/fullchain1.pem
+  ssl_key: /ssl/privkey1.pem
   use_x_forwarded_for: true
   trusted_proxies: !secret host_ip
 
