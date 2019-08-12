@@ -17,6 +17,9 @@ updater:
   include_used_components: true
 discovery:
 conversation:
+recorder:
+  db_url: !secret maria_db_url
+  purge_keep_days: 60
 history:
 # azure_event_hub:
 #   event_hub_namespace: !secret eh_sas_ns
@@ -158,6 +161,7 @@ sonos:
       - !secret sonos_playbase_ip
       - !secret sonos_kitchen_front_ip
       - !secret sonos_study_ip
+      - !secret sonos_office_ip
       # - !secret sonos_kitchen_back_ip
       # - !secret sonos_living_front_ip
       # - !secret sonos_living_back_ip
