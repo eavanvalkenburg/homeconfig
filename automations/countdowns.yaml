@@ -21,3 +21,8 @@
           name: WE
           type: anniversary
           date: 08/11/2017
+      - service: python_script.date_countdown
+        data:
+          name: Verloving
+          type: anniversary
+          date: 19/07/2019
