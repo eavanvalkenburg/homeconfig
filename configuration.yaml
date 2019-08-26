@@ -81,10 +81,6 @@ custom_updater:
 
 ### iframes
 panel_iframe:
-  pihole:
-    title: Pi-Hole
-    icon: mdi:cancel
-    url: !secret pihole_address_fe
   sonarr:
     title: Sonarr
     icon: mdi:television-classic
