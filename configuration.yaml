@@ -21,16 +21,28 @@ recorder:
   db_url: !secret maria_db_url
   purge_keep_days: 60
 history:
-azure_event_hub:
-  event_hub_namespace: !secret eh_sas_ns
-  event_hub_instance_name:  !secret eh_sas_instance
-  event_hub_sas_policy: !secret eh_sas_policy
-  event_hub_sas_key: !secret eh_sas_key
-  filter:
-    include_domains:
-    - homeassistant
-    - light
-    - media_player
+# azure_event_hub:
+#   event_hub_namespace: !secret eh_sas_ns
+#   event_hub_instance_name:  !secret eh_sas_instance
+#   event_hub_sas_policy: !secret eh_sas_policy
+#   event_hub_sas_key: !secret eh_sas_key
+#   filter:
+#     include_domains:
+#     - homeassistant
+#     - light
+#     - media_player
+
+# azure_event_hub_new:
+#   event_hub_namespace: !secret eh_sas_ns
+#   event_hub_instance_name:  !secret eh_sas_instance
+#   event_hub_sas_policy: !secret eh_sas_policy
+#   event_hub_sas_key: !secret eh_sas_key
+  # filter:
+  #   include_domains:
+  #   - homeassistant
+  #   - light
+  #   - media_player
+
 logbook:
   exclude:
     entities:
@@ -81,6 +93,10 @@ panel_iframe:
     title: Couchpotato
     icon: mdi:filmstrip
     url: !secret cp_address
+  zwave2mqtt:
+    title: Z-Wave to MQTT
+    icon: mdi:z-wave
+    url: !secret zwave2mqtt_address
 
 ### included components, automations and scripts
 sensor: !include components/sensors.yaml
@@ -112,10 +128,12 @@ device_tracker:
   - platform: unifi
     host: !secret host_ip
     site_id: 5vyjbuzt
-    verify_ssl: false
+    verify_ssl: true
     username: !secret unifi_user
     password: !secret unifi_pass
     consider_home: 180
+    dont_track_devices: true
+    dont_track_wired_clients: true
     new_device_defaults:
       track_new_devices: false
       hide_if_away: false
@@ -187,7 +205,11 @@ camera:
 
 logger:
   default: critical
-#   logs:
+  logs:
+    requests.packages.urllib3.connectionpool: critical
+    py.warnings: critical
+  #   custom_components.azure_event_hub_new: debug
+  #   homeassistant.components.azure_event_hub: debug
 #     homeassistant.components.python_script: debug
     # custom_components.homeconnect: debug
     # homeassistant.components.sonos: debug

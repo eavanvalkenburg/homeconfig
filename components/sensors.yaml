@@ -10,6 +10,10 @@
       - winddirection
       - precipitation
 
+  - platform: dsmr
+    port: /dev/ttyUSB0
+    dsmr_version: 5
+
   # - platform: bunq
   #   api_key: !secret bunq_api_key
 
