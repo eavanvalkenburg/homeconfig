@@ -2,3 +2,6 @@
     duration: '00:25:00'
     icon: mdi:food-apple
     name: Tomato Timer
+  blind_manual_override_timer:
+    duration: '02:00:00'
+    name: Blind Manual Override Timer
