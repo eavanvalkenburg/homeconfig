@@ -25,10 +25,8 @@
         arg: /
 
   - platform: pi_hole
-    host: !secret pihole_address
+    host: localhost:4865
     location: admin
-    ssl: true
-    verify_ssl: true
     monitored_conditions:
       - ads_blocked_today
       - dns_queries_today
@@ -61,6 +59,10 @@
 
   - platform: dnsip
 
+  - platform: sonarr_upcoming_media
+    api_key: !secret sonarr_api_key
+    days: 2
+
   - platform: sonarr
     api_key: !secret sonarr_api_key
     monitored_conditions:
@@ -74,7 +76,23 @@
     include_paths:
       - /content
     unit: TB
-    
+
+  - platform: plex_recently_added
+    name: Recently Added Movies # will create sensor.recently_added_movies
+    token: !secret plex_token
+    host: !secret host_ip
+    port: 32400
+    section_types:
+    - movie
+
+  - platform: plex_recently_added
+    name: Recently Added TV # will create sensor.recently_added_tv
+    token: !secret plex_token
+    host: !secret host_ip
+    port: 32400
+    section_types:
+    - show
+
   - platform: postnl
     username: !secret postnl_un
     password: !secret postnl_pw

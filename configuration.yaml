@@ -211,6 +211,12 @@ input_number:
 camera:
   - platform: ring
 
+alexa_media:
+  accounts:
+    - email: !secret amazon_user
+      password: !secret amazon_password
+      url: amazon.com
+
 # homeconnect:
 #   client_id: !secret homeconnect_client_id
 #   client_secret: !secret homeconnect_client_secret
