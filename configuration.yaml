@@ -15,12 +15,17 @@ frontend:
 config:
 updater:
   include_used_components: true
+hacs:
+  token: !secret hacs_token
+  theme: True
+  python_script: True
 discovery:
 conversation:
 recorder:
   db_url: !secret maria_db_url
   purge_keep_days: 60
 history:
+
 # azure_event_hub:
 #   event_hub_namespace: !secret eh_sas_ns
 #   event_hub_instance_name:  !secret eh_sas_instance
@@ -73,11 +78,6 @@ http:
 
 api:
 python_script:
-custom_updater:
-  track:
-    - components
-  component_urls:
-    - https://raw.githubusercontent.com/pippyn/Home-Assistant-Sensor-Afvalbeheer/master/custom_components.json
 
 ### iframes
 panel_iframe:

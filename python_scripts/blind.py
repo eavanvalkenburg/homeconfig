@@ -16,9 +16,9 @@ clear_day = True if clear_day_sensor > 0 else False
 previous_position_input = 'input_number.last_set_blind_position'
 previous_set_position = float(hass.states.get(previous_position_input).state)
 
-logger.warning("Timer status: " + hass.states.get('timer.blind_manual_override_timer').state)
-logger.warning("Current blind position: " + str(blind_position))
-logger.warning("Previous set blind position: " + str(previous_set_position))
+# logger.warning("Timer status: " + hass.states.get('timer.blind_manual_override_timer').state)
+# logger.warning("Current blind position: " + str(blind_position))
+# logger.warning("Previous set blind position: " + str(previous_set_position))
 if hass.states.get('timer.blind_manual_override_timer').state != 'active':
     # logger.warning("Current blind position: " + str(blind_position))
     # logger.warning("Previous set blind position: " + str(previous_set_position))
