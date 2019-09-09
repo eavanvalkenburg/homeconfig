@@ -1,3 +1,4 @@
+  - platform: ring
   - platform: template
     switches:
       multimedia:

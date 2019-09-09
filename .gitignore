@@ -153,3 +153,10 @@ core
 links
 *token*
 .Trash*
+
+www
+/custom_components/sia
+/custom_components/afvalbeheer
+/custom_components/alexa_media
+/custom_components/plex_recently_added
+/custom_components/sonarr_upcoming_media

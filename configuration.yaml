@@ -10,15 +10,15 @@ homeassistant:
    - type: homeassistant
   #  - type: legacy_api_password
 frontend:
-  themes: !include components/themes.yaml
+  themes: !include themes/themes.yaml
   javascript_version: latest
 config:
 updater:
   include_used_components: true
 hacs:
   token: !secret hacs_token
-  theme: True
-  python_script: True
+  theme: true
+  python_script: true
 discovery:
 conversation:
 recorder:
@@ -183,6 +183,8 @@ sonos:
 ring:
   username: !secret ring_username
   password: !secret ring_password
+light:
+  - platform: ring
 
 binary_sensor:
   - platform: ring
@@ -217,6 +219,17 @@ alexa_media:
       password: !secret amazon_password
       url: amazon.com
 
+sia:
+ port: !secret sia_hub_port
+ hubs:
+   - name: !secret sia_hub_name
+     account: !secret sia_hub_user
+     encryption_key: !secret sia_hub_key
+     zones:
+       - zone: 1
+         sensors:
+           - alarm
+
 # homeconnect:
 #   client_id: !secret homeconnect_client_id
 #   client_secret: !secret homeconnect_client_secret
@@ -224,6 +237,7 @@ alexa_media:
 logger:
   default: critical
   logs:
+    custom_components.sia: info
     requests.packages.urllib3.connectionpool: critical
     py.warnings: critical
   #   custom_components.azure_event_hub_new: debug

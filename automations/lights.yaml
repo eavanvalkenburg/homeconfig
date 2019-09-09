@@ -74,6 +74,5 @@
       event_data:
         actionName: LIGHTS_TURN_OFF
     action:
-    - alias: Turn all lights off
-      service: homeassistant.turn_off
+    - service: homeassistant.turn_off
       entity_id: group.all_lights

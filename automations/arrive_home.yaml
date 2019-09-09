@@ -59,8 +59,7 @@
       event_data:
         actionName: MUSIC
     action:
-    - alias: Resume music
-      service: media_player.media_play
+    - service: media_player.media_play
       entity_id: media_player.bedroom
 
   - alias: "Play media"
@@ -71,6 +70,5 @@
       event_data:
         actionName: MEDIA
     action:
-    - alias: Turn on xbox and tv
-      service: media_player.turn_on
+    - service: media_player.turn_on
       entity_id: media_player.multimedia

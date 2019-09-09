@@ -33,6 +33,7 @@ today = datetime.datetime.now().date()
 name = data.get('name')
 type = data.get('type')
 sensorName = "sensor.{}_{}".format(type , name.replace(" " , "_"))
+sensorNameDate = "sensor.date_{}_{}".format(type , name.replace(" " , "_"))
 
 dateStr = data.get('date')
 dateSplit = dateStr.split("/")
@@ -48,7 +49,6 @@ nextOccur = datetime.date(thisYear , dateMonth , dateDay)
 numberOfDays = 0
 years = int(thisYear) - dateYear
 
-
 if today < nextOccur:
   numberOfDays = (nextOccur - today).days
 
@@ -57,12 +57,26 @@ elif today > nextOccur:
   numberOfDays = int((nextOccur - today).days)
   years = years+1
 
-
-hass.states.set(sensorName , numberOfDays ,
-  {
+str_format = "%Y-%m-%d"
+# logger.critical("{}-{}-{}".format(dateYear,dateMonth,dateDay))
+# logger.critical(date.isoformat())
+date_str = date.isoformat()
+next_str = nextOccur.isoformat()
+attributes =   {
     "icon" : "mdi:calendar-star" ,
+    "original_date": date_str ,
+    "next_date": next_str ,
     "unit_of_measurement" : "days" ,
     "friendly_name" : "{}'s {}".format(name, type) ,
     "years" : years
   }
-)
+attributes_date =   {
+    "icon" : "mdi:calendar-star" ,
+    "original_date": date_str ,
+    "friendly_name" : "{}'s {}".format(name, type) ,
+    "days_until": numberOfDays, 
+    "years" : years
+  }
+# logger.critical(attributes)
+hass.states.set(sensorName, numberOfDays, attributes)
+hass.states.set(sensorNameDate, nextOccur, attributes_date )
