@@ -225,6 +225,7 @@ sia:
    - name: !secret sia_hub_name
      account: !secret sia_hub_user
      encryption_key: !secret sia_hub_key
+     ping_interval: 10
      zones:
        - zone: 1
          sensors:
@@ -237,7 +238,7 @@ sia:
 logger:
   default: critical
   logs:
-    custom_components.sia: info
+    custom_components.sia: debug
     requests.packages.urllib3.connectionpool: critical
     py.warnings: critical
   #   custom_components.azure_event_hub_new: debug

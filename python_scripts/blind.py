@@ -1,7 +1,7 @@
 
 blind_name = 'cover.blind'
 blind_state = hass.states.get(blind_name)
-blind_position = float(blind_state.attributes.get('current_position'))
+blind_position = float(blind_state.attributes.get('request_position'))
 blind_threshold = float(hass.states.get('input_number.blind_closure').state)
 
 temp_inside = float(hass.states.get('sensor.study_sensor_temperature').state)
@@ -16,6 +16,9 @@ clear_day = True if clear_day_sensor > 0 else False
 previous_position_input = 'input_number.last_set_blind_position'
 previous_set_position = float(hass.states.get(previous_position_input).state)
 
+alarm_state = hass.states.get('alarm_control_panel.ajaxhub_1_alarm').state
+# logger.warning("alarm " + alarm_state)
+# logger.warning("test" if alarm_state == "armed_night" else "not good")
 # logger.warning("Timer status: " + hass.states.get('timer.blind_manual_override_timer').state)
 # logger.warning("Current blind position: " + str(blind_position))
 # logger.warning("Previous set blind position: " + str(previous_set_position))
@@ -42,9 +45,9 @@ if hass.states.get('timer.blind_manual_override_timer').state != 'active':
             }
 
         new_position = 100
-        if sun_elevation < blind_threshold:
+        if sun_elevation < blind_threshold or alarm_state == 'armed_night':
             new_position = 0
-        if  clear_day \
+        elif  clear_day \
         and temp_inside > temp_thresholds["inside"] \
         and temp_outside > temp_thresholds["outside"] \
         and sun_elevation < sun["elevation_max"] \

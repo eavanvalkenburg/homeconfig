@@ -23,5 +23,9 @@
     trigger:
       - platform: time_pattern
         minutes: '/5'
+      - platform: state
+        entity_id: alarm_control_panel.ajaxhub_1_alarm
+        # Optional
+        from: "armed_night"
     action:
       - service: python_script.blind
